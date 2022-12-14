@@ -1,33 +1,37 @@
-package br.com.client.api.entities;
+package br.com.client.api.dto;
 
-import jakarta.persistence.*;
+import br.com.client.api.entities.Client;
+import jakarta.persistence.Column;
 
 import java.time.Instant;
-import java.util.Objects;
 
-@Entity
-@Table(name = "tb_client")
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ClientDTO {
     private Long id;
     private String name;
     private String cpf;
     private Double income;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant birthDate;
     private Integer children;
 
-    public Client() {
+    public ClientDTO() {
     }
 
-    public Client(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
+    public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.income = income;
         this.birthDate = birthDate;
         this.children = children;
+    }
+
+    public ClientDTO(Client client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.cpf = client.getCpf();
+        this.income = client.getIncome();
+        this.birthDate = client.getBirthDate();
+        this.children = client.getChildren();
     }
 
     public Long getId() {
@@ -76,17 +80,5 @@ public class Client {
 
     public void setChildren(Integer children) {
         this.children = children;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client client)) return false;
-        return Objects.equals(getId(), client.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }

@@ -1,9 +1,12 @@
 package br.com.client.api.services;
 
+import br.com.client.api.dto.ClientDTO;
 import br.com.client.api.entities.Client;
 import br.com.client.api.repositories.ClientRepository;
 import br.com.client.api.resources.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +19,13 @@ public class ClientService {
     private ClientRepository repository;
 
     @Transactional(readOnly = true)
-    public List<Client> findPaged() {
-        return repository.findAll();
+    public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
+        return repository.findAll(pageRequest).map(ClientDTO::new);
     }
 
-    public Client findById(Long id) {
+    public ClientDTO findById(Long id) {
         Optional<Client> optional = repository.findById(id);
         Client client = optional.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-        return client;
+        return new ClientDTO(client);
     }
 }
