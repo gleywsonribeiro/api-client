@@ -5,7 +5,6 @@ import br.com.client.api.entities.Client;
 import br.com.client.api.repositories.ClientRepository;
 import br.com.client.api.services.exceptions.DataBaseException;
 import br.com.client.api.services.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -17,8 +16,12 @@ import java.util.Optional;
 
 @Service
 public class ClientService {
-    @Autowired
-    private ClientRepository repository;
+    //@Autowired
+    private final ClientRepository repository;
+
+    public ClientService(ClientRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional(readOnly = true)
     public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
