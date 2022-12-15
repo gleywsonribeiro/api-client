@@ -1,5 +1,6 @@
 package br.com.client.api.entities;
 
+import br.com.client.api.dto.ClientDTO;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -19,6 +20,9 @@ public class Client {
     private Integer children;
 
     public Client() {
+    }
+    public Client(ClientDTO dto) {
+        setDto(dto);
     }
 
     public Client(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
@@ -88,5 +92,13 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    public void setDto(ClientDTO dto) {
+        this.name = dto.getName();
+        this.cpf = dto.getCpf();
+        this.income = dto.getIncome();
+        this.birthDate = dto.getBirthDate();
+        this.children = dto.getChildren();
     }
 }

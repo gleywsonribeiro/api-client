@@ -1,4 +1,4 @@
-package br.com.client.api.resources.exceptions;
+package br.com.client.api.services.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String message) {
