@@ -5,7 +5,6 @@ import br.com.client.api.entities.Client;
 import br.com.client.api.repositories.ClientRepository;
 import br.com.client.api.services.exceptions.DataBaseException;
 import br.com.client.api.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
